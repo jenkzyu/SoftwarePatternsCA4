@@ -43,7 +43,8 @@ public class AdminLogin extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(AdminLogin.this, "Hi", Toast.LENGTH_SHORT).show();
-
+                            startActivity(new Intent(AdminLogin.this, AdminHomeActivity.class));
+                            finish();
                         }else
                             Toast.makeText(AdminLogin.this, "Error", Toast.LENGTH_SHORT).show();
                     }

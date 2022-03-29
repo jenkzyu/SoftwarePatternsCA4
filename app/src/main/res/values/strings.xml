@@ -3,4 +3,6 @@
     <string name="adminLogin">Admin login? <font fgcolor='#FF3700B3'><b>Login</b></font></string>
     <string name="signup_screen">Don\'t have an account? <font fgcolor='#FFBB86FC'><b>Register</b></font></string>
     <string name="login_screen">Already have an account? <font fgcolor='#FF3700B3'><b>Login</b></font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
