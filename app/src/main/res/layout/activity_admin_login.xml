@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".LoginActivity">
+    tools:context=".AdminLogin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome"
+                android:text="Admin Login"
                 android:textAlignment="center"
                 android:textColor="@color/purple_500"
                 android:textSize="42sp">
@@ -46,7 +45,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="32dp"
-                android:hint="Email"
+                android:hint="Username"
                 app:boxStrokeColor="@color/purple_200">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -54,8 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_baseline_email_24"
-                    android:drawablePadding="12dp"
-                    android:inputType="textEmailAddress" />
+                    android:drawablePadding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -81,22 +79,11 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/txtRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="10dp"
-                android:gravity="end"
-                android:textColor="@color/black"
-                android:text="@string/signup_screen"
-                android:textSize="15dp" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:text="Login"
                 android:textColor="@color/white"
                 app:cornerRadius="220dp"
@@ -122,11 +109,11 @@
 
 
                 <TextView
-                    android:id="@+id/goToAdminLogin"
+                    android:id="@+id/backToCustomerLogin"
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/adminLogin"
+                    android:text="Go Back"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="16sp">
