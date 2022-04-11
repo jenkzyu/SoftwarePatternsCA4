@@ -2,11 +2,19 @@ package com.example.onlineclothingstore.Model;
 
 public class StockModel {
     private String key;
-    private String name, manufacturer, category, image;
+    private String stock_id, name, manufacturer, category, image;
     private double price;
     private int stockCount;
 
     public StockModel() {
+    }
+
+    public String getStock_id() {
+        return stock_id;
+    }
+
+    public void setStock_id(String stock_id) {
+        this.stock_id = stock_id;
     }
 
     public String getKey() {
