@@ -4,6 +4,7 @@ public class StockModel {
     private String key;
     private String name, manufacturer, category, image;
     private double price;
+    private int stockCount;
 
     public StockModel() {
     }
@@ -54,5 +55,13 @@ public class StockModel {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(int stockCount) {
+        this.stockCount = stockCount;
     }
 }
