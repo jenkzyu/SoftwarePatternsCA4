@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineClothingStore" >
-
+        <activity
+            android:name=".CustomerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_customer"
+            android:theme="@style/Theme.OnlineClothingStore.NoActionBar" />
         <activity
             android:name=".AdminHomeActivity"
             android:exported="false"
@@ -17,9 +21,6 @@
             android:theme="@style/Theme.OnlineClothingStore.NoActionBar" />
         <activity
             android:name=".AdminLogin"
-            android:exported="false" />
-        <activity
-            android:name=".StoreActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
