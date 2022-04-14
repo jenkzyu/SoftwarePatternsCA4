@@ -1,4 +1,4 @@
-package com.example.onlineclothingstore.ui.home;
+package com.example.onlineclothingstore.AdminFragments.home;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.example.onlineclothingstore.Adapter.StocksAdapter;
 import com.example.onlineclothingstore.Model.StockModel;
 import com.example.onlineclothingstore.R;
+
 import com.example.onlineclothingstore.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -68,14 +69,14 @@ public class HomeFragment extends Fragment {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         alertDialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
-        //Observer pattern using ViewModel
+
         setHasOptionsMenu(true);
 
         //setLayout
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.stockRecycler.setLayoutManager(layoutManager);
         binding.stockRecycler.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
-
+        //Observer pattern using ViewModel
         //viewModel
         homeViewModel.getMessageError().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

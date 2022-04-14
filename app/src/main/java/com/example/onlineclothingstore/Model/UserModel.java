@@ -1,7 +1,7 @@
 package com.example.onlineclothingstore.Model;
 
 public class UserModel {
-    private String name, email, password;
+    private String name, email, password, address;
 
     public UserModel() {
     }
@@ -34,5 +34,13 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.onlineclothingstore.ui.purchase;
+package com.example.onlineclothingstore.AdminFragments.purchase;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,6 +1,4 @@
-package com.example.onlineclothingstore.ui.home;
-
-import android.os.Parcelable;
+package com.example.onlineclothingstore.AdminFragments.home;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;

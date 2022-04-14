@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.onlineclothingstore.databinding.ActivityAdminMainBinding;
 
-public class AdminMainActivity extends AppCompatActivity {
+public class AdminHomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityAdminMainBinding binding;

@@ -17,4 +17,7 @@
     <string name="menu_customers">Customer</string>
     <string name="menu_purchase">Purchase</string>
     <string name="menu_stock">Stock</string>
+    <string name="title_activity_customer_main">CustomerMainActivity</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>
