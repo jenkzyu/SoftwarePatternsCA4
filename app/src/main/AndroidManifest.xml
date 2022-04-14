@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineClothingStore" >
         <activity
-            android:name=".CustomerActivity"
+            android:name=".CustomerHomeActivity"
             android:exported="false"
             android:label="@string/title_activity_customer"
             android:theme="@style/Theme.OnlineClothingStore.NoActionBar" />
