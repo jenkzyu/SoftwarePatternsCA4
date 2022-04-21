@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,12 +24,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.onlineclothingstore.Adapter.StocksAdapter;
-import com.example.onlineclothingstore.Model.StockModel;
+import com.example.onlineclothingstore.Adapter.CategoryAdapter;
+import com.example.onlineclothingstore.Constants.Constants;
+import com.example.onlineclothingstore.Constants.SwipeHelper;
+import com.example.onlineclothingstore.EventBus.ToastEvent;
+import com.example.onlineclothingstore.Model.CategoryModel;
 import com.example.onlineclothingstore.R;
-
 import com.example.onlineclothingstore.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,9 +40,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,14 +58,14 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     //Image upload
     private static final int PICK_IMAGE_REQUEST = 1234; //any number
-    private ImageView img_item;
+    private ImageView img_category;
     //storage
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private Uri imageUri = null;
-    private List<StockModel> stockModel;
-    private StocksAdapter stocksAdapter;
-    AlertDialog alertDialog;
+    private List<CategoryModel> categoryModels;
+    private CategoryAdapter categoryAdapter;
+    private AlertDialog alertDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,17 +73,10 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        //init firebase storage
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-        alertDialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
 
-        setHasOptionsMenu(true);
+        //init view
+        categoryView();
 
-        //setLayout
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        binding.stockRecycler.setLayoutManager(layoutManager);
-        binding.stockRecycler.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
         //Observer pattern using ViewModel
         //viewModel
         homeViewModel.getMessageError().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -86,17 +87,87 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        homeViewModel.getListMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<StockModel>>() {
+        homeViewModel.getCategoryListMutable().observe(getViewLifecycleOwner(), new Observer<List<CategoryModel>>() {
             @Override
-            public void onChanged(List<StockModel> stockModelList) {
+            public void onChanged(List<CategoryModel> categoryModelList) {
                 alertDialog.dismiss();
-                stockModel = stockModelList;
-                stocksAdapter = new StocksAdapter(getContext(), stockModel);
-                binding.stockRecycler.setAdapter(stocksAdapter);
+                categoryModels = categoryModelList;
+                categoryAdapter = new CategoryAdapter(getContext(), categoryModels);
+                binding.categoryRecycler.setAdapter(categoryAdapter);
             }
         });
 
+
         return binding.getRoot();
+    }
+
+    private void categoryView() {
+        //init firebase storage
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        alertDialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
+
+        //setLayout
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        binding.categoryRecycler.setLayoutManager(layoutManager);
+        binding.categoryRecycler.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
+
+        //Init swipe helper options
+        SwipeHelper swipeHelper = new SwipeHelper(getContext(), binding.categoryRecycler, 200) {
+            @Override
+            public void instantiateButton(RecyclerView.ViewHolder viewHolder, List<CustomButton> btn) {
+                btn.add(new CustomButton(getContext(), "Remove",
+                        30, 0, Color.parseColor("#FF3C30")//color
+                        , pos -> {
+                    Constants.categorySelected = categoryModels.get(pos);
+                    initDeleteDialog();
+                }));
+
+
+            }
+        };
+
+        setHasOptionsMenu(true);
+    }
+
+    private void initDeleteDialog() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+        builder.setTitle("Remove");
+        builder.setMessage("Do you want to remove item from category?");
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("REMOVE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteCategory();
+            }
+        });
+
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    //Remove Category
+    private void deleteCategory() {
+        FirebaseDatabase.getInstance()
+                .getReference(Constants.CATEGORY_REFERENCE)
+                .child(Constants.categorySelected.getCat_id())
+                .removeValue()
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                homeViewModel.loadCategories();
+                EventBus.getDefault().postSticky(new ToastEvent(Constants.ACTION.DELETE, true));
+            }
+        });
     }
 
     @Override
@@ -107,35 +178,35 @@ public class HomeFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_add_item) {
+        if (item.getItemId() == R.id.action_add_category) {
             createItemDialog();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    // Builder pattern to create new Category
     private void createItemDialog() {
-        //init Builder creational design pattern using AlertDialog.Builder class.
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
         builder.setTitle("Create");
+        builder.setMessage("Please fill information");
 
-        View itemView = LayoutInflater.from(getContext()).inflate(R.layout.layout_create_stock_item, null);
-        EditText edt_item_name = itemView.findViewById(R.id.item_name);
-        EditText edt_item_stock = itemView.findViewById(R.id.item_stock);
-        EditText edt_item_make = itemView.findViewById(R.id.item_manufacturer);
-        EditText edt_item_category = itemView.findViewById(R.id.item_category);
-        EditText edt_item_price = itemView.findViewById(R.id.item_price);
-        img_item = itemView.findViewById(R.id.item_img);
+        View itemView = LayoutInflater.from(getContext()).inflate(R.layout.layout_update_category, null);
 
+        EditText edt_catName = itemView.findViewById(R.id.edt_cat_name);
+        img_category = itemView.findViewById(R.id.category_img);
 
-        Glide.with(getContext()).load(R.drawable.ic_baseline_image_search_24).into(img_item);
+        //set data
+        Glide.with(getContext()).load(R.drawable.ic_baseline_image_24).into(img_category);
 
-        img_item.setOnClickListener(new View.OnClickListener() {
+        //set Event
+        img_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.setType("image/*");
                 i.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(i, "Select Image"), PICK_IMAGE_REQUEST);
+                //activityResultLauncher.launch(i);
             }
         });
 
@@ -145,22 +216,19 @@ public class HomeFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-
         builder.setPositiveButton("CREATE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                StockModel stockModel = new StockModel();
-                stockModel.setName(edt_item_name.getText().toString().trim());
-                stockModel.setStockCount(Integer.parseInt(edt_item_stock.getText().toString().trim()));
-                stockModel.setManufacturer(edt_item_make.getText().toString().trim());
-                stockModel.setCategory(edt_item_category.getText().toString().trim());
-                stockModel.setPrice(Double.parseDouble(edt_item_price.getText().toString().trim()));
+                CategoryModel categoryModel = new CategoryModel();
+                categoryModel.setName(edt_catName.getText().toString().trim());
+                categoryModel.setStocks(new ArrayList<>()); // Create empty list for new food in category
                 if (imageUri != null) {
                     //init firebase storage for image storage
+                    alertDialog.setMessage("Uploading...");
                     alertDialog.show();
+
                     String unique_name = UUID.randomUUID().toString();
                     StorageReference imgFolder = storageReference.child("images/" + unique_name);
-                    //set img to db
                     imgFolder.putFile(imageUri).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -174,30 +242,38 @@ public class HomeFragment extends Fragment {
                             imgFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    stockModel.setImage(uri.toString());
-                                    createStock(stockModel);
+                                    categoryModel.setImage(uri.toString());
+                                    createCategory(categoryModel);
                                 }
                             });
                         }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            alertDialog.setMessage(new StringBuilder("Uploading: ").append(progress).append("%"));
+                        }
                     });
+
                 } else {
-                    createStock(stockModel);
+                    createCategory(categoryModel);
                 }
+
             }
         });
 
-        builder.setCancelable(false);
-        //show dialog builder
+        //Show Dialog
         builder.setView(itemView);
-        AlertDialog dialog = builder.create();
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 
-    private void createStock(StockModel stockModel) {
-        FirebaseDatabase.getInstance().getReference("Stocks")
+    //create category
+    private void createCategory(CategoryModel categoryModel) {
+        FirebaseDatabase.getInstance()
+                .getReference(Constants.CATEGORY_REFERENCE)
                 .push()
-                .setValue(stockModel)
+                .setValue(categoryModel)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -206,11 +282,13 @@ public class HomeFragment extends Fragment {
                 }).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                homeViewModel.loadStocks();
-                Toast.makeText(getContext(), "Created!", Toast.LENGTH_SHORT).show();
+                homeViewModel.loadCategories();
+                EventBus.getDefault().postSticky(new ToastEvent(Constants.ACTION.CREATE, true));
+
             }
         });
     }
+
 
     @Override
     public void onDestroyView() {
@@ -224,7 +302,7 @@ public class HomeFragment extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data != null && data.getData() != null) {
                 imageUri = data.getData();
-                img_item.setImageURI(imageUri);
+                img_category.setImageURI(imageUri);
             }
 
         }

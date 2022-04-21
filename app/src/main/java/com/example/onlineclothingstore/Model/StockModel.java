@@ -6,6 +6,9 @@ public class StockModel {
     private double price;
     private int stockCount;
 
+    //Searching food
+    private  int posInList = -1;
+
     public StockModel() {
     }
 
@@ -71,5 +74,13 @@ public class StockModel {
 
     public void setStockCount(int stockCount) {
         this.stockCount = stockCount;
+    }
+
+    public int getPosInList() {
+        return posInList;
+    }
+
+    public void setPosInList(int posInList) {
+        this.posInList = posInList;
     }
 }

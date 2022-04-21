@@ -24,6 +24,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
     private ActivityCustomerMainBinding binding;
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
                 R.id.nav_homeCustomerFragment, R.id.nav_cartFragment)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_customer_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_customer_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener(this);
@@ -59,8 +60,19 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()==R.id.nav_logout)
-            logout();
+        binding.drawerCustomerLayout.closeDrawers();
+        switch (item.getItemId()) {
+            case R.id.nav_homeCustomerFragment:
+                navController.navigate(R.id.nav_homeCustomerFragment);
+                break;
+            case R.id.nav_cartFragment:
+                navController.navigate(R.id.nav_cartFragment);
+                break;
+            case R.id.nav_customer_logout:
+                logout();
+                break;
+        }
+
         return true;
     }
 

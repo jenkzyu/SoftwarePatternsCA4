@@ -22,6 +22,11 @@
         android:name="com.example.onlineclothingstore.AdminFragments.purchase.PurchaseFragment"
         android:label="@string/menu_purchase"
         tools:layout="@layout/fragment_purchase" />
+    <fragment
+        android:id="@+id/nav_stockList"
+        android:name="com.example.onlineclothingstore.AdminFragments.stockList.StockListFragment"
+        android:label="Stock List"
+        tools:layout="@layout/fragment_stock_list" />
 
 
 </navigation>

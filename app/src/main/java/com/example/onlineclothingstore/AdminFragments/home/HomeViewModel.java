@@ -4,8 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.onlineclothingstore.Callback.IStockCallbackListener;
-import com.example.onlineclothingstore.Model.StockModel;
+import com.example.onlineclothingstore.Callback.ICategoryCallBackListener;
+import com.example.onlineclothingstore.Constants.Constants;
+import com.example.onlineclothingstore.Model.CategoryModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,71 +16,61 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeViewModel extends ViewModel implements IStockCallbackListener {
+public class HomeViewModel extends ViewModel implements ICategoryCallBackListener {
     /**
      * Observer pattern using MutableLiveData as a pattern from ViewModel to Activity
      * to make its value writable or can be change anytime.
      */
-    private MutableLiveData<List<StockModel>> listMutableLiveData;
+    private MutableLiveData<List<CategoryModel>> categoryListMutable;
     private MutableLiveData<String> messageError = new MutableLiveData<>();
-    private IStockCallbackListener stockCallbackListener;
+    private ICategoryCallBackListener categoryCallBackListener;
 
     public HomeViewModel() {
-        stockCallbackListener = this;
+        categoryCallBackListener = this;
+    }
+
+    public MutableLiveData<List<CategoryModel>> getCategoryListMutable() {
+        if (categoryListMutable == null) {
+            categoryListMutable = new MutableLiveData<>();
+            messageError = new MutableLiveData<>();
+            loadCategories();
+        }
+        return categoryListMutable;
 
     }
 
-    public MutableLiveData<List<StockModel>> getListMutableLiveData() {
-        if (listMutableLiveData == null) {
-            listMutableLiveData = new MutableLiveData<>();
-            messageError = new MutableLiveData<>();
-            loadStocks();
-        }
-        return listMutableLiveData;
+    public void loadCategories() {
+        List<CategoryModel> list = new ArrayList<>();
+        DatabaseReference catRef = FirebaseDatabase.getInstance().getReference(Constants.CATEGORY_REFERENCE);
+        catRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                    CategoryModel model = itemSnapshot.getValue(CategoryModel.class);
+                    model.setCat_id(itemSnapshot.getKey()); // itemSnapshot.getRef().getKey() debugged my buggy RATING SYSTEM from snapshot.getKey()
+                    list.add(model);
+                }
+                categoryCallBackListener.onCategoryLoadSuccess(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                categoryCallBackListener.onCategoryLoadFailed(error.getMessage());
+            }
+        });
     }
 
     public MutableLiveData<String> getMessageError() {
         return messageError;
     }
 
-    public void loadStocks() {
-        List<StockModel> stockModelList = new ArrayList<>();
-        DatabaseReference stockRef = FirebaseDatabase.getInstance().getReference("Stocks");
-        stockRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot stockSnapshot: snapshot.getChildren()){
-                        StockModel model = stockSnapshot.getValue(StockModel.class);
-                        //model.setStock_id(stockSnapshot.getKey());
-                        stockModelList.add(model);
-                    }
-                    if (stockModelList.size()>0){
-                        stockCallbackListener.onStockLoadSuccess(stockModelList);
-                    }else{
-                        stockCallbackListener.onStockLoadFailed("Empty");
-                    }
-                }else {
-                    stockCallbackListener.onStockLoadFailed("error on loading list");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                stockCallbackListener.onStockLoadFailed(error.getMessage());
-            }
-        });
-    }
-
-
     @Override
-    public void onStockLoadSuccess(List<StockModel> stockModelList) {
-        listMutableLiveData.setValue(stockModelList);
+    public void onCategoryLoadSuccess(List<CategoryModel> categoryModelList) {
+        categoryListMutable.setValue(categoryModelList);
     }
 
     @Override
-    public void onStockLoadFailed(String message) {
+    public void onCategoryLoadFailed(String message) {
         messageError.setValue(message);
     }
-    //code something here to load all stock items
 }
