@@ -14,9 +14,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.onlineclothingstore.EventBus.CategoryClick;
 import com.example.onlineclothingstore.databinding.ActivityCustomerMainBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class CustomerHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,7 +45,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_homeCustomerFragment, R.id.nav_cartFragment)
+                R.id.nav_homeCustomerFragment, R.id.nav_cartFragment, R.id.nav_customerStockList)
                 .setOpenableLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_customer_main);
@@ -99,5 +104,28 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    //EventBus
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    //recieving event from CategoryAdapter
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onCategorySelected(CategoryClick categoryClick) {
+        if (categoryClick.isSuccess()) {
+            navController.navigate(R.id.nav_customerStockList);
+            //Toast.makeText(this, "Click to "+categoryClick.getCategoryModel().getName(), Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
