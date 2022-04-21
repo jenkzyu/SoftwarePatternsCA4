@@ -22,8 +22,7 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CatViewHolder> {
     private Context context;
     private List<CategoryModel> categoryModelList;
-    private int DEFAULT_COLUMN_COUNT = 0;
-    private int FULL_WIDTH_COLUMN = 1;
+
 
     public CategoryAdapter(Context context, List<CategoryModel> categoryModelList) {
         this.context = context;
@@ -51,6 +50,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CatVie
             }
         });
 
+    }
+
+    public List<CategoryModel> getCategoryList() {
+        return categoryModelList;
     }
 
     @Override
@@ -81,12 +84,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CatVie
     @Override
     public int getItemViewType(int position) {
         if (categoryModelList.size() == 1){
-            return DEFAULT_COLUMN_COUNT;
+            return Constants.DEFAULT_COLUMN_COUNT;
         }else{
             if (categoryModelList.size() % 2 == 0){
-                return DEFAULT_COLUMN_COUNT;
+                return Constants.DEFAULT_COLUMN_COUNT;
             }else{
-                return (position > 1 && position == categoryModelList.size() -1) ? FULL_WIDTH_COLUMN: DEFAULT_COLUMN_COUNT;
+                return (position > 1 && position == categoryModelList.size() -1) ? Constants.FULL_WIDTH_COLUMN: Constants.DEFAULT_COLUMN_COUNT;
             }
         }
     }

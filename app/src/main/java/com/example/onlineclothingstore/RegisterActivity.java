@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
-    private String email, username, password, password2;
+    private String email, username, address, password, password2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean areFieldReady() {
         username = binding.signUpName.getText().toString().trim();
         email = binding.signUpEmail.getText().toString().trim();
+        address = binding.signUpAddress.getText().toString().trim();
         password = binding.signUpPassword.getText().toString().trim();
         password2 = binding.signUpPassword2.getText().toString().trim();
 
@@ -60,6 +61,10 @@ public class RegisterActivity extends AppCompatActivity {
             binding.signUpEmail.setError("Field is required");
             flag = true;
             requestView = binding.signUpEmail;
+        } else if (address.isEmpty()) {
+                binding.signUpAddress.setError("Field is required");
+                flag = true;
+                requestView = binding.signUpAddress;
         } else if (password.isEmpty()) {
             binding.signUpPassword.setError("Field is required");
             flag = true;
@@ -93,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    UserModel user = new UserModel(username, email, password);
+                    UserModel user = new UserModel(username, email, address,password);
                     databaseReference.child(firebaseAuth.getUid())
                             .setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

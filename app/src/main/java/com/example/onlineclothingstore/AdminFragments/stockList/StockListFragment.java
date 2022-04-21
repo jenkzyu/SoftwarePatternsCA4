@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -85,6 +86,7 @@ public class StockListFragment extends Fragment {
         storageReference = storage.getReference();
         //Init stocks
         stockViews();
+
 
         stockListViewModel.getListMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<StockModel>>() {
             @Override
