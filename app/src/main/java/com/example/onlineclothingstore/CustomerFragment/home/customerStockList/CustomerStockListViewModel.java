@@ -11,20 +11,12 @@ import java.util.List;
 
 public class CustomerStockListViewModel extends ViewModel {
    private MutableLiveData<List<StockModel>> stockMutableLiveData;
-   private MutableLiveData<List<RatingModel>> ratingListMutableLiveData;
+
 
     public CustomerStockListViewModel() {
-        ratingListMutableLiveData = new MutableLiveData<>();
+
     }
 
-//    public void setRatingModel(RatingModel ratingModel){
-//        if (ratingListMutableLiveData !=null)
-//            ratingListMutableLiveData.setValue(ratingModel);
-//    }
-
-    public MutableLiveData<List<RatingModel>> getRatingListMutableLiveData() {
-        return ratingListMutableLiveData;
-    }
 
     public MutableLiveData<List<StockModel>> getStockMutableLiveData() {
         if (stockMutableLiveData == null){

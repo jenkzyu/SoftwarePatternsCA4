@@ -69,4 +69,7 @@ dependencies {
 
     //Spots Library
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+
+    //Expandable layout
+    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
 }

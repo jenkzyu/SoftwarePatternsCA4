@@ -17,6 +17,7 @@
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/content_admin_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/content_customer_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/customer_stock_list_fragment.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/food_reviews_item_layout.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_cart.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_customer.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_gallery.xml" value="0.5541666666666667" />
@@ -31,11 +32,12 @@
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_create_stock_item.xml" value="0.4935185185185185" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_rating.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_stock.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_stock_item.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_stock_item.xml" value="0.33" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_update_category.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/nav_header_admin_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/nav_header_customer_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/stock_fragment.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/stock_reviews_fragment.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_customer_drawer.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_main_drawer.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_main_drawerA.xml" value="0.5541666666666667" />
