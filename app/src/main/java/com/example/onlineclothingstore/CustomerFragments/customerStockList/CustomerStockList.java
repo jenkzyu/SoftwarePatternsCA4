@@ -22,21 +22,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.onlineclothingstore.Adapter.StockCustomerAdapter;
+import com.example.onlineclothingstore.Callback.ICartLoadListener;
 import com.example.onlineclothingstore.Constants.Constants;
+import com.example.onlineclothingstore.Model.CartModel;
 import com.example.onlineclothingstore.Model.StockModel;
 import com.example.onlineclothingstore.R;
 import com.example.onlineclothingstore.databinding.CustomerStockListFragmentBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerStockList extends Fragment {
+public class CustomerStockList extends Fragment implements ICartLoadListener {
 
     private CustomerStockListViewModel stockListViewModel;
     private CustomerStockListFragmentBinding binding;
     private StockCustomerAdapter stockCustomerAdapter;
+    private ICartLoadListener iCartLoadListener;
 
 
     @Override
@@ -44,14 +49,14 @@ public class CustomerStockList extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         stockListViewModel = new ViewModelProvider(this).get(CustomerStockListViewModel.class);
         binding = CustomerStockListFragmentBinding.inflate(inflater, container, false);
-
+        iCartLoadListener = this;
         //init stockview
         stockView();
         stockListViewModel.getStockMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<StockModel>>() {
             @Override
             public void onChanged(List<StockModel> stockModelList) {
                 if (stockModelList != null) {
-                    stockCustomerAdapter = new StockCustomerAdapter(getContext(), stockModelList);
+                    stockCustomerAdapter = new StockCustomerAdapter(getContext(), stockModelList, iCartLoadListener);
                     binding.stockListRecycler.setAdapter(stockCustomerAdapter);
                 }
             }
@@ -132,4 +137,13 @@ public class CustomerStockList extends Fragment {
     }
 
 
+    @Override
+    public void onCartLoadSuccess(List<CartModel> cartModelList) {
+
+    }
+
+    @Override
+    public void onCartLoadFailed(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
 }

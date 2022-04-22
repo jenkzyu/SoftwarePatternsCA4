@@ -14,19 +14,23 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.onlineclothingstore.Callback.ICartLoadListener;
 import com.example.onlineclothingstore.Callback.IRecyclerClickListener;
 import com.example.onlineclothingstore.Constants.Constants;
-
 import com.example.onlineclothingstore.CustomerFragments.customerStockReviews.StockReviewsFragment;
+import com.example.onlineclothingstore.Model.CartModel;
 import com.example.onlineclothingstore.Model.RatingModel;
 import com.example.onlineclothingstore.Model.StockModel;
 import com.example.onlineclothingstore.R;
 import com.example.onlineclothingstore.databinding.LayoutStockItemBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
@@ -41,10 +45,12 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
     private Context context;
     private List<StockModel> stockModelList;
     private ExpandableLayout expandableLayout;
+    private ICartLoadListener iCartLoadListener;
 
-    public StockCustomerAdapter(Context context, List<StockModel> stockModelList) {
+    public StockCustomerAdapter(Context context, List<StockModel> stockModelList, ICartLoadListener iCartLoadListener) {
         this.context = context;
         this.stockModelList = stockModelList;
+        this.iCartLoadListener = iCartLoadListener;
     }
 
     @NonNull
@@ -103,7 +109,9 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
         holder.binding.imgCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Added to cart!", Toast.LENGTH_SHORT).show();
+
+                Constants.selectedStock = stockModelList.get(position);
+                addToCart(stockModelList.get(position));
             }
         });
 
@@ -115,6 +123,68 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
                 showDialogRating();
             }
         });
+
+    }
+
+    private void addToCart(StockModel stockModel) {
+        DatabaseReference userCart = FirebaseDatabase.getInstance().getReference(Constants.CART_REF)
+                .child(Constants.currentUser.getUid());
+        userCart.child(Constants.selectedStock.getStock_id())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            CartModel cartModel = snapshot.getValue(CartModel.class);
+                            cartModel.setQuantity(cartModel.getQuantity() + 1);
+                            Map<String, Object> updateData = new HashMap<>();
+                            updateData.put("quantity", cartModel.getQuantity());
+                            updateData.put("totalPrice", cartModel.getQuantity() * cartModel.getPrice());
+
+                            userCart.child(stockModel.getStock_id())
+                                    .updateChildren(updateData)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            iCartLoadListener.onCartLoadFailed("Added Successfully!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            iCartLoadListener.onCartLoadFailed(e.getMessage());
+                                        }
+                                    });
+                        } else {
+                            CartModel cartModel = new CartModel();
+                            cartModel.setName(stockModel.getName());
+                            cartModel.setImage(stockModel.getImage());
+                            cartModel.setQuantity(1);
+                            cartModel.setPrice(stockModel.getPrice());
+                            cartModel.setKey(stockModel.getStock_id());
+                            cartModel.setTotalPrice(stockModel.getPrice());
+
+                            userCart.child(stockModel.getStock_id())
+                                    .setValue(cartModel)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            iCartLoadListener.onCartLoadFailed("Added Successfully!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            iCartLoadListener.onCartLoadFailed(e.getMessage());
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
     }
 

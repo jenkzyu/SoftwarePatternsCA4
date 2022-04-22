@@ -95,7 +95,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void resisterUser() {
-        //FirebaseUser user = firebaseAuth.getCurrentUser();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.USER_REFERENCES);
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

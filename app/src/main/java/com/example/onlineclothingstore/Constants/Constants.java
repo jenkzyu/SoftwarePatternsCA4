@@ -10,6 +10,7 @@ public class Constants {
     public static final String ADMIN_REF = "Admin";
     public static final String CATEGORY_REFERENCE = "Category";
     public static final String RATING_REF = "Ratings";
+    public static final String CART_REF = "Cart";
 
     public static CategoryModel categorySelected;
     public static StockModel selectedStock;
