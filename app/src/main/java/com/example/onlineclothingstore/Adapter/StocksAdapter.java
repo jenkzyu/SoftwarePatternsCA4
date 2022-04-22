@@ -13,15 +13,13 @@ import com.example.onlineclothingstore.Callback.IRecyclerClickListener;
 import com.example.onlineclothingstore.Constants.Constants;
 import com.example.onlineclothingstore.Model.StockModel;
 import com.example.onlineclothingstore.databinding.LayoutStockBinding;
-import com.example.onlineclothingstore.databinding.LayoutStockItemBinding;
+
 
 import java.util.List;
 
 public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksViewHolder> {
     private Context context;
     private List<StockModel> stockModelList;
-    private int DEFAULT_COLUMN_COUNT = 0;
-    private int FULL_WIDTH_COLUMN = 1;
 
     public StocksAdapter(Context context, List<StockModel> stockModelList) {
         this.context = context;

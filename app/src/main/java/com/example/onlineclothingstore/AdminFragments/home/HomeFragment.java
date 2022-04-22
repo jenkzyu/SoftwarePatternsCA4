@@ -206,7 +206,6 @@ public class HomeFragment extends Fragment {
                 i.setType("image/*");
                 i.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(i, "Select Image"), PICK_IMAGE_REQUEST);
-                //activityResultLauncher.launch(i);
             }
         });
 

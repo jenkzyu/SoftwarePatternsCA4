@@ -8,6 +8,8 @@ public class StockModel {
 
     //Searching food
     private  int posInList = -1;
+    private Double ratingValue;
+    private Long ratingCount;
 
     public StockModel() {
     }
@@ -82,5 +84,21 @@ public class StockModel {
 
     public void setPosInList(int posInList) {
         this.posInList = posInList;
+    }
+
+    public Double getRatingValue() {
+        return ratingValue;
+    }
+
+    public void setRatingValue(Double ratingValue) {
+        this.ratingValue = ratingValue;
+    }
+
+    public Long getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(Long ratingCount) {
+        this.ratingCount = ratingCount;
     }
 }

@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,7 +53,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -113,7 +111,7 @@ public class StockListFragment extends Fragment {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
 
-        SwipeHelper swipeHelper = new SwipeHelper(getContext(), binding.stockListRecycler, width/6) {
+        SwipeHelper swipeHelper = new SwipeHelper(getContext(), binding.stockListRecycler, width / 6) {
             @Override
             public void instantiateButton(RecyclerView.ViewHolder viewHolder, List<CustomButton> btn) {
                 btn.add(new CustomButton(getContext(), "Remove",
@@ -182,6 +180,7 @@ public class StockListFragment extends Fragment {
         item_stock_manufacturer.setText(new StringBuilder().append(stockModel.getManufacturer()));
         item_stock_category.setText(new StringBuilder().append(stockModel.getCategory()));
         item_stock_price.setText(new StringBuilder().append(stockModel.getPrice()));
+
         Glide.with(getContext()).load(stockModel.getImage()).into(stock_image);
 
         //set Data
@@ -200,11 +199,10 @@ public class StockListFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
-        });
-        builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+        }).setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                StockModel updateStock = new StockModel();
+                StockModel updateStock = stockModel;
                 updateStock.setName(item_stock_name.getText().toString().trim());
                 updateStock.setStockCount(Integer.parseInt(item_stock_level.getText().toString().trim()));
                 updateStock.setManufacturer(item_stock_manufacturer.getText().toString().trim());
@@ -230,9 +228,9 @@ public class StockListFragment extends Fragment {
                             imgFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                   updateStock.setImage(uri.toString());
-                                   Constants.categorySelected.getStocks().set(pos, updateStock);
-                                   updateStock(Constants.categorySelected.getStocks(), Constants.ACTION.UPDATE);
+                                    updateStock.setImage(uri.toString());
+                                    Constants.categorySelected.getStocks().set(pos, updateStock);
+                                    updateStock(Constants.categorySelected.getStocks(), Constants.ACTION.UPDATE);
                                 }
                             });
                         }
@@ -243,7 +241,8 @@ public class StockListFragment extends Fragment {
                             alertDialog.setMessage(new StringBuilder("Uploading: ").append(progress).append("%"));
                         }
                     });
-                }else {
+
+                } else {
                     Constants.categorySelected.getStocks().set(pos, updateStock);
                     updateStock(Constants.categorySelected.getStocks(), Constants.ACTION.UPDATE);
                 }
@@ -345,7 +344,7 @@ public class StockListFragment extends Fragment {
                         }
                     });
                 } else {
-                    if (Constants.categorySelected.getStocks() == null){
+                    if (Constants.categorySelected.getStocks() == null) {
                         Constants.categorySelected.setStocks(new ArrayList<>());
                     }
                     Constants.categorySelected.getStocks().add(stockModel);
@@ -361,6 +360,17 @@ public class StockListFragment extends Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getData() != null) {
+                imageUri = data.getData();
+                stock_image.setImageURI(imageUri);
+            }
+        }
+    }
+
     private void updateStock(List<StockModel> stocks, Constants.ACTION action) {
         Map<String, Object> updateData = new HashMap<>();
         updateData.put("stocks", stocks);
@@ -371,12 +381,12 @@ public class StockListFragment extends Fragment {
                 .updateChildren(updateData).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     stockListViewModel.getListMutableLiveData();
                     EventBus.getDefault().postSticky(new ToastEvent(action, true));
                 }
@@ -431,9 +441,9 @@ public class StockListFragment extends Fragment {
 
     private void searchStock(String query) {
         List<StockModel> searchResults = new ArrayList<>();
-        for (int i = 0; i< Constants.categorySelected.getStocks().size(); i++){
+        for (int i = 0; i < Constants.categorySelected.getStocks().size(); i++) {
             StockModel stockModel = Constants.categorySelected.getStocks().get(i);
-            if (stockModel.getName().toLowerCase().contains(query.toLowerCase()) || stockModel.getManufacturer().toLowerCase().contains(query.toLowerCase())){
+            if (stockModel.getName().toLowerCase().contains(query.toLowerCase()) || stockModel.getManufacturer().toLowerCase().contains(query.toLowerCase())) {
                 stockModel.setPosInList(i); // save index
                 searchResults.add(stockModel);
             }
@@ -442,16 +452,6 @@ public class StockListFragment extends Fragment {
         stockListViewModel.getListMutableLiveData().setValue(searchResults);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getData() != null) {
-                imageUri = data.getData();
-                stock_image.setImageURI(imageUri);
-            }
-        }
-    }
 
     @Override
     public void onDestroy() {

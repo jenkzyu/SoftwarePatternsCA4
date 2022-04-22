@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -14,10 +16,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
+import com.example.onlineclothingstore.Constants.Constants;
 import com.example.onlineclothingstore.EventBus.CategoryClick;
+import com.example.onlineclothingstore.Model.UserModel;
 import com.example.onlineclothingstore.databinding.ActivityCustomerMainBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,6 +39,8 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
     private ActivityCustomerMainBinding binding;
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    private FirebaseAuth firebaseAuth;
+    TextView txt_user;
     NavController navController;
 
     @Override
@@ -39,6 +51,8 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarCustomerMain.toolbar);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         drawer = binding.drawerCustomerLayout;
         navigationView = binding.navCustomerView;
@@ -53,6 +67,33 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
+
+        //Set Nav header user name of current user.
+        View view = navigationView.getHeaderView(0);
+        txt_user = view.findViewById(R.id.user_txt);
+
+        getUser();
+    }
+
+    private void getUser() {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance()
+                .getReference("Users").child(firebaseAuth.getUid());
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    UserModel user = snapshot.getValue(UserModel.class);
+                    Constants.currentUser = user;
+                    txt_user.setText(user.getName());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

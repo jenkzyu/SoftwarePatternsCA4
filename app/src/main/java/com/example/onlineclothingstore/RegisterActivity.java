@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
-    private String email, username, address, password, password2;
+    private String uid, email, username, address, password, password2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
