@@ -8,18 +8,18 @@
 
     <fragment
         android:id="@+id/nav_homeCustomerFragment"
-        android:name="com.example.onlineclothingstore.CustomerFragment.home.HomeCustomerFragment"
+        android:name="com.example.onlineclothingstore.CustomerFragments.home.HomeCustomerFragment"
         android:label="Home"
         tools:layout="@layout/home_customer_fragment" />
     <fragment
         android:id="@+id/nav_cartFragment"
-        android:name="com.example.onlineclothingstore.CustomerFragment.home.cart.CartFragment"
+        android:name="com.example.onlineclothingstore.CustomerFragments.cart.CartFragment"
         android:label="Cart"
         tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/nav_customerStockList"
-        android:name="com.example.onlineclothingstore.CustomerFragment.home.customerStockList.CustomerStockList"
+        android:name="com.example.onlineclothingstore.CustomerFragments.customerStockList.CustomerStockList"
         android:label="customer_stock_list_fragment"
         tools:layout="@layout/customer_stock_list_fragment" />
 

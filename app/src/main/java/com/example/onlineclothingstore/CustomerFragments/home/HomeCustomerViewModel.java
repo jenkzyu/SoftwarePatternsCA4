@@ -1,4 +1,4 @@
-package com.example.onlineclothingstore.CustomerFragment.home;
+package com.example.onlineclothingstore.CustomerFragments.home;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;

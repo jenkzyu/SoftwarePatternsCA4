@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,12 +24,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private String uid, email, username, address, password, password2;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         //back to main activity
         binding.goToLogin.setOnClickListener(view -> startActivity(
                 new Intent(RegisterActivity.this, LoginActivity.class)));
@@ -92,15 +95,21 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void resisterUser() {
+        //FirebaseUser user = firebaseAuth.getCurrentUser();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.USER_REFERENCES);
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    UserModel user = new UserModel(username, email, address,password);
+                    UserModel userModel = new UserModel();
+                    userModel.setUid(firebaseAuth.getUid());
+                    userModel.setName(username);
+                    userModel.setAddress(address);
+                    userModel.setEmail(email);
+                    userModel.setPassword(password);
                     databaseReference.child(firebaseAuth.getUid())
-                            .setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            .setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();

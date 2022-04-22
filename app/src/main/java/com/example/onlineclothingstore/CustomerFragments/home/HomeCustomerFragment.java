@@ -1,4 +1,4 @@
-package com.example.onlineclothingstore.CustomerFragment.home;
+package com.example.onlineclothingstore.CustomerFragments.home;
 
 import android.app.AlertDialog;
 import android.app.SearchManager;

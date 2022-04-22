@@ -11,14 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.onlineclothingstore.Callback.IRecyclerClickListener;
 import com.example.onlineclothingstore.Constants.Constants;
-import com.example.onlineclothingstore.CustomerFragment.home.StockReviews.StockReviewsFragment;
-import com.example.onlineclothingstore.CustomerFragment.home.customerStockList.CustomerStockListViewModel;
+
+import com.example.onlineclothingstore.CustomerFragments.customerStockReviews.StockReviewsFragment;
 import com.example.onlineclothingstore.Model.RatingModel;
 import com.example.onlineclothingstore.Model.StockModel;
 import com.example.onlineclothingstore.R;
@@ -51,7 +50,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
     @NonNull
     @Override
     public StocksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutStockItemBinding binding = LayoutStockItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        LayoutStockItemBinding binding = LayoutStockItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new StocksViewHolder(binding);
     }
 
@@ -65,7 +64,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
         holder.binding.itemDetailMake.setText(new StringBuilder("Manufacturer: ").append(stockModelList.get(position).getManufacturer()));
         holder.binding.itemDetailCategory.setText(new StringBuilder("Category: ").append(stockModelList.get(position).getCategory()));
 
-        if (stockModelList.get(position).getRatingValue() !=null){
+        if (stockModelList.get(position).getRatingValue() != null) {
             holder.binding.ratingBar.setRating(stockModelList.get(position).getRatingValue().floatValue());
         }
 
@@ -97,14 +96,14 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
             @Override
             public void onClick(View v) {
                 StockReviewsFragment fragment = new StockReviewsFragment();
-                fragment.show(((FragmentActivity)context).getSupportFragmentManager(),fragment.getTag());
+                fragment.show(((FragmentActivity) context).getSupportFragmentManager(), fragment.getTag());
             }
         });
 
         holder.binding.imgCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Clicked!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Added to cart!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,6 +117,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
         });
 
     }
+
     // Rating Sequence Methods
     private void showDialogRating() {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
@@ -169,8 +169,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(context, "HEllothere", Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
                             addRatingToStock(ratingModel.getRatingValue());
                         }
                     }
@@ -187,7 +186,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
+                        if (snapshot.exists()) {
                             StockModel stockModel = snapshot.getValue(StockModel.class);
                             stockModel.setKey(Constants.selectedStock.getKey());
 
@@ -207,7 +206,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
 
                             snapshot.getRef().updateChildren(updateData)
                                     .addOnCompleteListener(task -> {
-                                        if (task.isSuccessful()){
+                                        if (task.isSuccessful()) {
                                             Toast.makeText(context, "Thank you for submitting!", Toast.LENGTH_SHORT).show();
                                             Constants.selectedStock = stockModel;
                                         }
