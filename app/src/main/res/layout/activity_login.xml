@@ -82,7 +82,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/txtForgetPassword"
+                android:id="@+id/txtRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -120,20 +120,9 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="30dp">
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/textHolder"-->
-                <!--                    android:layout_width="243dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginLeft="20dp"-->
-                <!--                    android:text="Don't have an account?"-->
-                <!--                    android:textAlignment="center"-->
-                <!--                    android:textColor="@color/white"-->
-                <!--                    android:textSize="16sp">-->
-
-                <!--                </TextView>-->
 
                 <TextView
-                    android:id="@+id/goToRegister"
+                    android:id="@+id/goToAdminLogin"
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
