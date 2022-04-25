@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_orders_placed"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_baseline_person_24"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/orderNumber"
+                android:text="01/10/2018 13:02:42"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Name: Jenkin"
+                android:id="@+id/orderCustomerName"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Email: @asdsa"
+                android:id="@+id/orderCustomerEmail"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/cust_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Address: 1"
+                android:textSize="16sp" />
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
