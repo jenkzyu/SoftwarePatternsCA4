@@ -55,6 +55,7 @@ public class HomeCustomerFragment extends Fragment {
         mViewModel.getMessageError().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                alertDialog.dismiss();
                 Toast.makeText(getContext(), ""+s, Toast.LENGTH_SHORT).show();
             }
         });
@@ -75,7 +76,6 @@ public class HomeCustomerFragment extends Fragment {
     private void categoryView() {
         setHasOptionsMenu(true);
         alertDialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
-        alertDialog.show();
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         layoutManager.setOrientation(RecyclerView.VERTICAL);

@@ -4,10 +4,18 @@ import java.util.List;
 
 public class CategoryModel {
 
-    private String cat_id, name, image;
+    private String key, cat_id, name, image;
     private List<StockModel> stocks;
 
     public CategoryModel() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getCat_id() {
@@ -41,4 +49,6 @@ public class CategoryModel {
     public void setStocks(List<StockModel> stocks) {
         this.stocks = stocks;
     }
+
+
 }

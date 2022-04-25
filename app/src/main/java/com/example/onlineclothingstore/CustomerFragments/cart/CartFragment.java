@@ -3,7 +3,9 @@ package com.example.onlineclothingstore.CustomerFragments.cart;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,16 +16,23 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.onlineclothingstore.Adapter.CartAdapter;
 import com.example.onlineclothingstore.Callback.ICartLoadListener;
+import com.example.onlineclothingstore.CheckoutActivity;
 import com.example.onlineclothingstore.Constants.Constants;
 import com.example.onlineclothingstore.Constants.SwipeHelper;
+import com.example.onlineclothingstore.CustomerHomeActivity;
+import com.example.onlineclothingstore.LoginActivity;
 import com.example.onlineclothingstore.Model.CartModel;
+import com.example.onlineclothingstore.Model.UserModel;
 import com.example.onlineclothingstore.R;
 import com.example.onlineclothingstore.databinding.FragmentCartBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,7 +51,11 @@ public class CartFragment extends Fragment{
     private CartViewModel mViewModel;
     private FragmentCartBinding binding;
     private CartAdapter cartAdapter;
+    double sum = 0;
 
+    public static CartFragment newInstance(){
+        return new CartFragment();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -51,6 +64,8 @@ public class CartFragment extends Fragment{
         binding = FragmentCartBinding.inflate(inflater, container, false);
         
         initViews();
+
+
 
         mViewModel.getMessageError().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -67,7 +82,6 @@ public class CartFragment extends Fragment{
                     binding.cartItemTotal.setText(new StringBuilder("Total: €0.0"));
 
                 }else{
-                    double sum = 0;
                     for (CartModel cartModel : cartModelList) {
                         sum += cartModel.getTotalPrice();
                     }
@@ -76,9 +90,20 @@ public class CartFragment extends Fragment{
                     binding.cartRcv.setAdapter(cartAdapter);
                 }
 
-
+                binding.btnCartPlaceOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), CheckoutActivity.class);
+                        intent.putParcelableArrayListExtra("CartItems", (ArrayList<CartModel>) cartModelList);
+                        intent.putExtra("Total Price", String.valueOf(sum));
+                        startActivity(intent);
+                    }
+                });
             }
+
         });
+
+
 
         return  binding.getRoot();
     }

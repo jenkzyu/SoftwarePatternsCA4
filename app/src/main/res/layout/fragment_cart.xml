@@ -31,7 +31,7 @@
             android:textSize="16sp"/>
 
         <Button
-            android:id="@+id/cart_place_order"
+            android:id="@+id/btn_cart_place_order"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

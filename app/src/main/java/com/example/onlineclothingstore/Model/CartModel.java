@@ -1,12 +1,39 @@
 package com.example.onlineclothingstore.Model;
 
-public class CartModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CartModel implements Parcelable {
     private String key, name, image;
     private int quantity, stockCount;
     private double price, totalPrice;
 
+
+
     public CartModel() {
     }
+
+    protected CartModel(Parcel in) {
+        key = in.readString();
+        name = in.readString();
+        image = in.readString();
+        quantity = in.readInt();
+        stockCount = in.readInt();
+        price = in.readDouble();
+        totalPrice = in.readDouble();
+    }
+
+    public static final Creator<CartModel> CREATOR = new Creator<CartModel>() {
+        @Override
+        public CartModel createFromParcel(Parcel in) {
+            return new CartModel(in);
+        }
+
+        @Override
+        public CartModel[] newArray(int size) {
+            return new CartModel[size];
+        }
+    };
 
     public String getKey() {
         return key;
@@ -62,5 +89,22 @@ public class CartModel {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(key);
+        dest.writeString(name);
+        dest.writeString(image);
+        dest.writeInt(quantity);
+        dest.writeInt(stockCount);
+        dest.writeDouble(price);
+        dest.writeDouble(totalPrice);
     }
 }
