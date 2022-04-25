@@ -3,8 +3,66 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.5703125" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/drawable/ic_baseline_image_search_24.xml" value="0.5703125" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_admin.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_admin_home.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_admin_login.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_admin_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_checkout.xml" value="0.42086956521739133" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_customer_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_register.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/activity_store.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/app_bar_admin_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/app_bar_customer_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/content_admin_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/content_customer_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/customer_stock_list_fragment.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/food_reviews_item_layout.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_cart.xml" value="0.40468227424749165" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_customer.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_gallery.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_home.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_home_user.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_order_details.xml" value="0.3972222222222222" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_slideshow.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_stock.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_stock_list.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/home_customer_fragment.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_cart_item.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_category_item.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_create_item.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_create_stock_item.xml" value="0.4935185185185185" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_customer_item.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_order_details_item.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_place_order.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_rating.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_stock.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_stock_item.xml" value="0.33" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_update_category.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/nav_header_admin_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/nav_header_customer_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/stock_fragment.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/stock_reviews_fragment.xml" value="0.37565217391304345" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_customer_drawer.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_main_drawer.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_main_drawerA.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_main_drawera.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/admin_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/admin_mainA.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/admin_maina.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/admin_menu_nav.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/customer.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/customer_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/search_menu.xml" value="0.5661458333333333" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/stock_list_search_menu.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/OnlineClothingStore/app/src/main/res/layout/activity_admin_home.xml" value="0.2546875" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/OnlineClothingStore/app/src/main/res/layout/activity_admin_login.xml" value="0.2546875" />
         <entry key="..\:/Users/steam/AndroidStudioProjects/OnlineClothingStore/app/src/main/res/layout/activity_login.xml" value="0.2546875" />
         <entry key="..\:/Users/steam/AndroidStudioProjects/OnlineClothingStore/app/src/main/res/layout/activity_main.xml" value="0.240625" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/OnlineClothingStore/app/src/main/res/layout/activity_register.xml" value="0.2546875" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/OnlineClothingStore/app/src/main/res/layout/fragment_purchase.xml" value="0.2546875" />
+        <entry key="..\:/Users/steam/AndroidStudioProjects/OnlineClothingStore/app/src/main/res/menu/admin_menu_nav.xml" value="0.2546875" />
       </map>
     </option>
   </component>
