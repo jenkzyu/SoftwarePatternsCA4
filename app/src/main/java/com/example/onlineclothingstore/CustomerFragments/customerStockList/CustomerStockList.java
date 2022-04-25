@@ -52,6 +52,7 @@ public class CustomerStockList extends Fragment implements ICartLoadListener {
         iCartLoadListener = this;
         //init stockview
         stockView();
+
         stockListViewModel.getStockMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<StockModel>>() {
             @Override
             public void onChanged(List<StockModel> stockModelList) {

@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerFragments.home.cart.CartFragment">
+    tools:context=".CustomerFragments.cart.CartFragment">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_rcv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello this is cart fragment" />
+        android:layout_above="@+id/group_holder" />
 
-</FrameLayout>
+      <Space
+          android:layout_width="match_parent"
+          android:layout_height="16dp" />
+
+        <TextView
+            android:id="@+id/cart_item_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+            android:text="Total: € 0"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/cart_place_order"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+            android:text="Checkout"/>
+    </LinearLayout>
+
+
+</ScrollView>

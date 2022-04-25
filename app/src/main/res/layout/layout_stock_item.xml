@@ -22,7 +22,7 @@
         android:weightSum="10">
 
         <ImageView
-            android:id="@+id/food_details_img"
+            android:id="@+id/stock_details_img"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_gravity="center"

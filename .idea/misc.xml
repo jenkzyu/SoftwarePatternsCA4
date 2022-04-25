@@ -18,7 +18,7 @@
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/content_customer_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/customer_stock_list_fragment.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/food_reviews_item_layout.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_cart.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_cart.xml" value="0.40468227424749165" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_customer.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_gallery.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_home.xml" value="0.5541666666666667" />
@@ -27,6 +27,7 @@
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_stock.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_stock_list.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/home_customer_fragment.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_cart_item.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_category_item.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_create_item.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/layout_create_stock_item.xml" value="0.4935185185185185" />

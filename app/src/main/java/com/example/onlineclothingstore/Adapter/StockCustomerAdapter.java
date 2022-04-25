@@ -63,7 +63,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
     @Override
     public void onBindViewHolder(@NonNull StocksViewHolder holder, int position) {
         //populate Image
-        Glide.with(context).load(stockModelList.get(position).getImage()).into(holder.binding.foodDetailsImg);
+        Glide.with(context).load(stockModelList.get(position).getImage()).into(holder.binding.stockDetailsImg);
         holder.binding.itemDetailPrice.setText(new StringBuilder("€").append(stockModelList.get(position).getPrice()));
         holder.binding.itemDetailName.setText(new StringBuilder("").append(stockModelList.get(position).getName()));
         holder.binding.itemDetailStock.setText(new StringBuilder("Stock Level: ").append(stockModelList.get(position).getStockCount()));
@@ -130,7 +130,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
         DatabaseReference userCart = FirebaseDatabase.getInstance().getReference(Constants.CART_REF)
                 .child(Constants.currentUser.getUid());
         userCart.child(Constants.selectedStock.getStock_id())
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -161,6 +161,7 @@ public class StockCustomerAdapter extends RecyclerView.Adapter<StockCustomerAdap
                             cartModel.setQuantity(1);
                             cartModel.setPrice(stockModel.getPrice());
                             cartModel.setKey(stockModel.getStock_id());
+                            cartModel.setStockCount(stockModel.getStockCount());
                             cartModel.setTotalPrice(stockModel.getPrice());
 
                             userCart.child(stockModel.getStock_id())

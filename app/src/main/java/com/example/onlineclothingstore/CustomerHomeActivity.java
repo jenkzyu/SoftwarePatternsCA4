@@ -165,8 +165,6 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
     public void onCategorySelected(CategoryClick categoryClick) {
         if (categoryClick.isSuccess()) {
             navController.navigate(R.id.nav_customerStockList);
-            //Toast.makeText(this, "Click to "+categoryClick.getCategoryModel().getName(), Toast.LENGTH_SHORT).show();
-
         }
     }
 }
