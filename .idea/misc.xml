@@ -24,6 +24,7 @@
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_gallery.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_home.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_home_user.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_order_details.xml" value="0.3972222222222222" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_slideshow.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_stock.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/fragment_stock_list.xml" value="0.5541666666666667" />
@@ -42,7 +43,7 @@
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/nav_header_admin_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/nav_header_customer_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/stock_fragment.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/stock_reviews_fragment.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/layout/stock_reviews_fragment.xml" value="0.37565217391304345" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_customer_drawer.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_main_drawer.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Jenkz Yu/AndroidStudioProjects/SoftwarePatternsCA4/app/src/main/res/menu/activity_main_drawerA.xml" value="0.5541666666666667" />

@@ -18,16 +18,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletionService;
 
-public class CustomerViewModel extends ViewModel implements IUserCallbackListener {
+public class CustomerViewModel extends ViewModel implements IUserCallbackListener{
 
     private MutableLiveData<List<UserModel>> userModelMutableList;
+    //private MutableLiveData<List<OrderModel>> orListMutableLiveData;
     private MutableLiveData<String> messageError;
     private IUserCallbackListener listener;
 
+    //private IOrderCallbackListener listener;
+
     public CustomerViewModel() {
-       listener = this;
+        listener = this;
+
     }
 
     public MutableLiveData<List<UserModel>> getUserModelMutableList() {
@@ -60,36 +63,41 @@ public class CustomerViewModel extends ViewModel implements IUserCallbackListene
         });
     }
 
-    //    public MutableLiveData<List<OrderModel>> getOrListMutableLiveData() {
-//        loadFromDb();
+
+
+//    public MutableLiveData<List<OrderModel>> getOrListMutableLiveData() {
+//        if (orListMutableLiveData ==null){
+//            orListMutableLiveData = new MutableLiveData<>();
+//            loadFromDb();
+//        }
 //        return orListMutableLiveData;
 //    }
-
+//
 //    public void loadFromDb() {
 //        List<OrderModel> orderModelList = new ArrayList<>();
 //        Query orderRef = FirebaseDatabase.getInstance().getReference(Constants.ORDER_REF)
 //                .orderByChild("orderDate");
 ////                .child(Constants.currentUser.getUid())
-//                orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        if (snapshot.exists()) {
-//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                                OrderModel orderModel = dataSnapshot.getValue(OrderModel.class);
-//                                orderModel.setKey(dataSnapshot.getKey());
-//                                orderModelList.add(orderModel);
-//                            }
-//                            listener.onOrderLoadSuccess(orderModelList);
-//                        } else {
-//                            listener.onOrderLoadFailed("Error");
-//                        }
+//        orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                        OrderModel orderModel = dataSnapshot.getValue(OrderModel.class);
+//                        orderModel.setKey(dataSnapshot.getKey());
+//                        orderModelList.add(orderModel);
 //                    }
+//                    listener.onOrderLoadSuccess(orderModelList);
+//                } else {
+//                    listener.onOrderLoadFailed("Error");
+//                }
+//            }
 //
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//                        listener.onOrderLoadFailed(error.getMessage());
-//                    }
-//                });
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                listener.onOrderLoadFailed(error.getMessage());
+//            }
+//        });
 //    }
 
     public MutableLiveData<String> getMessageError() {
@@ -106,4 +114,6 @@ public class CustomerViewModel extends ViewModel implements IUserCallbackListene
         messageError.setValue(message);
 
     }
+
+
 }

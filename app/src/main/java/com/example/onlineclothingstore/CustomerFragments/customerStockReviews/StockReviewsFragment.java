@@ -58,6 +58,7 @@ public class StockReviewsFragment extends BottomSheetDialogFragment implements I
         //load reviews from firebase
         loadReviews();
 
+
         reviewsViewModel.getRatingModelMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<RatingModel>>() {
             @Override
             public void onChanged(List<RatingModel> ratingModelList) {

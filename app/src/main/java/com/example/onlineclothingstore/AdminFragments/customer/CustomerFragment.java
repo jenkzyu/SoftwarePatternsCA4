@@ -26,6 +26,7 @@ public class CustomerFragment extends Fragment {
     private FragmentCustomerBinding binding;
     private CustomerAdapter customerAdapter;
     private List<UserModel> userModels;
+    private List<OrderModel> orderModelList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +37,15 @@ public class CustomerFragment extends Fragment {
 
 
         initData();
+
+//        customerViewModel.getOrListMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<OrderModel>>() {
+//            @Override
+//            public void onChanged(List<OrderModel> orderModels) {
+//                orderModelList = orderModels;
+//                customerAdapter = new CustomerAdapter(getContext(), orderModelList);
+//                binding.customerRecycler.setAdapter(customerAdapter);
+//            }
+//        });
 
        customerViewModel.getUserModelMutableList().observe(getViewLifecycleOwner(), new Observer<List<UserModel>>() {
            @Override
